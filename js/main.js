@@ -1,70 +1,68 @@
-let kilometri = document.querySelector('#Km');
-let eta = document.querySelector('#age');
+const generateTiketDom = document.getElementById('generateTiket');
 
-let minorenne = 18;
-let over = 65;
+const ageDom = document.getElementById('age');
+const kmDom = document.getElementById('km');
+const nameDom = document.getElementById('name');
 
-const prezzoPerKm = 0.21;
+const ticketNameDom = document.getElementById('ticketName');
+const discountDom = document.getElementById('discount');
+const wagonDom = document.getElementById('wagon');
+const prenotationCodeDom = document.getElementById('prenotationCode');
+const ticketPriceDom = document.getElementById('ticketPrice');
+const yourTicketDom = document.getElementById('yourTicket');
 
-const prezzoIntero = kilometri * prezzoPerKm;
+const priceKm = 0.21;
 
 
-// buttons
-const domButtonConfirm = document.querySelector("#confirm");
-const domButtonDelete = document.querySelector('#delete')
+generateTiketDom.addEventListener('click',
 
-domButtonConfirm.addEventListener('click',
     function () {
-        const domNome = document.getElementById('name');
-        const domNameText = domNome.value;
-        alert(domNameText);
+        let km = kmDom.value;
+        let age = ageDom.value;
+        let name = nameDom.value;
 
-        const domDistance = document.getElementById('Km');
-        const domDistanceText = domDistance.value;
-        alert(domDistanceText);
+        let price = km * priceKm;
+
+        if (age == "minnorenne") {
+            price = price - (price / 100 * 20);
+            discountDom.innerHTML = "Sconto 20% minorenne";
+
+        } else if (age == "senior") {
+            price = price - (price / 100 * 40);
+            discountDom.innerHTML = "Sconto 40% senior";
+
+        } else{
+            discountDom.innerHTML = " Prezzo pieno";
+        }
+
+        yourTicketDom.classList.remove('d-none');
+
+        ticketNameDom.innerHTML = name;
+        ticketPriceDom.innerHTML = `${price.toFixed(2)}€`
+
+        const wagon = Math.floor(Math.random()* 20) + 1;
+        wagonDom.innerHTML = wagon;
+
+        const cp = Math.floor(Math.random() * (100000 - 90000)) + 90000;
+
+        prenotationCodeDom.innerHTML = cp;
+
 
     }
-)
+);
 
-domButtonDelete.addEventListener('click',
-    function () {
-        const domNome = document.getElementById('name');
-        const domNameText = domNome.value.reset();
-        
+const resetFormDom = document.querySelector('#resetForm');
 
-        const domDistance = document.getElementById('Km');
-        const domDistanceText = domDistance.value;
-      
-
-    }
+resetFormDom.addEventListener('click',
+   function() {
+    yourTicketDom.classList.add('d-none');
+    nameDom.value = '';
+    kmDom.value = '';
+   }
 )
 
 
 
-// const scontoMinorenni = (prezzoIntero / 100) * 20;
-// const totaleMinorenni = prezzoIntero - scontoMinorenni;
-
-// const scontoOver = (prezzoIntero / 100) * 40;
-// const totaleOver = prezzoIntero - scontoOver;
-
-// if (eta < minorenne) {
-
-
-
-// } else if (eta > over){
-
-
-
-// } else{
-
-
-// }
-
-console.log(kilometri);
-console.log(eta);
-console.log(prezzoIntero);
-// console.log(totaleMinorenni);
-// console.log(totaleOver);
 
 
 
